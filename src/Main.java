@@ -12,7 +12,9 @@ public class Main {
             //opciones al iniciar
             System.out.println("Usuario \n1.Crear\n2.Iniciar\n3.Eleminar");
             Scanner optionUser = new Scanner(System.in); //Create a Sacanner object
+
             int userOpt = optionUser.nextInt();
+
             switch (userOpt){
                 case 1:
                     UserMethods.createUser();
