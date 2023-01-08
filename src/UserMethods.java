@@ -1,9 +1,8 @@
 import java.util.Scanner;
 public class UserMethods {
 /** Class UserMethods
- *
  *In this class be all methods that may be used for the users.
- * This methods are such as: created user, eliminated user and mdification password.
+ * These methods are such as: created user, eliminated user and mdification password.
  * */
     public static void createUser(){
         /**CrateUSer
@@ -23,6 +22,21 @@ public class UserMethods {
         userNew.name = userName;
         userNew.password = userPassword;
         UserMySQL.userMySQLInsert(userNew);
+    }
+
+    public static void startUser(){
+
+        Scanner userStart = new Scanner(System.in);
+        System.out.println("input User Name");
+        String userName = userStart.nextLine();
+        System.out.println("input password");
+        String userPassword = userStart.nextLine();
+
+        User user_start = new User();
+        user_start.name = userName;
+        user_start.password = userPassword;
+
+        UserMySQL.userMySQLStart(user_start);
     }
 
 

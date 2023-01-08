@@ -44,6 +44,45 @@ public class UserMySQL {
        }
     }
 
+    public static void userMySQLStart(User user){
+        //Obtiene instancia de la conección
+        Connecxion conectionStart = Connecxion.get_instancia();
+        //try cacth para evitar errores de coneccion
+        try(Connection cns = conectionStart.get_connection()){
+            PreparedStatement ps;
+            ResultSet rs;
+            //query de busquedad
+            String querySearch="SELECT * FROM users WHERE name_user LIKE ?";
+            ps= cns.prepareStatement(querySearch);
+            ps.setString(1, user.getName());
+            rs=ps.executeQuery();
+
+            if(rs.next()){
+                do{
+                    String nameUser = rs.getString("name_user");
+                    String passwordUser = rs.getString("password_user");
+                    if(nameUser.equals(user.getName()) && passwordUser.equals(user.getPassword())){
+                        System.out.println("Session start");
+                    }else{
+                        //return si no es correcto el password
+                        System.out.println("User or password incorrect");
+                    }
+                }while(rs.next());
+
+            }else{
+                //return si no hay coincidencias con el nombre del usuario
+                System.out.println("User or password incorrect");
+            }
+
+
+        }catch(SQLException s){
+            System.out.println(s);
+        }
+
+        //buscar en la base de datos por name
+        //validad si es el mismo password
+    }
+
     public static void userInsert(User user){
 
             Connecxion coneccionn = Connecxion.get_instancia();
@@ -61,5 +100,7 @@ public class UserMySQL {
                 System.out.println(e);
             }
     }
+
+
 
 }
