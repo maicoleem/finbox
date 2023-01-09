@@ -23,15 +23,25 @@ public class GroupsMethods {
     }
 
     public static void startOpt(){
-        System.out.println("Options \n1.Eliminar \n2.Salir");
+        System.out.println("Options \n1.message \n2.upload\n3.download\n4.Eliminar \n5.Salir");
         Scanner optGroup = new Scanner(System.in);
         String opt = optGroup.nextLine();
 
         switch (opt){
             case "1":
-                groupDelete(UserAdmin.groupAdmin);
+                //crear mensajes
+                createMessage();
                 break;
             case "2":
+                //cargar mensaje
+                break;
+            case "3":
+                //descargar mensaje
+                break;
+            case "4":
+                groupDelete(UserAdmin.groupAdmin);
+                break;
+            case "5":
                 groupExit();
                 break;
             default:
@@ -96,6 +106,47 @@ public class GroupsMethods {
     public static void groupExit(){
         UserAdmin.groupAdmin = null;
         System.out.println("Group exit,Success");
+    }
+    public static void createMessage(){
+        System.out.println("write first message");
+        Scanner message = new Scanner(System.in);
+        UserAdmin.message_1 = message.nextLine();
+
+        System.out.println("write second message");
+        UserAdmin.message_2 = message.nextLine();
+
+        System.out.println("write third message");
+        UserAdmin.message_3 = message.nextLine();
+
+        System.out.println("write fourth message");
+        UserAdmin.message_4 = message.nextLine();
+
+        System.out.println("write fifth message");
+        UserAdmin.message_5 = message.nextLine();
+
+        System.out.println("write sixth message");
+        UserAdmin.message_6 = message.nextLine();
+
+        System.out.println("write seventh message");
+        UserAdmin.message_7 = message.nextLine();
+
+        System.out.println("write eighth message");
+        UserAdmin.message_8 = message.nextLine();
+
+        System.out.println("write ninth message");
+        UserAdmin.message_9 = message.nextLine();
+
+        System.out.println("write tenth message");
+        UserAdmin.message_10 = message.nextLine();
+
+        System.out.println("write eleventh message");
+        UserAdmin.message_11 = message.nextLine();
+
+        System.out.println("write twelfth message");
+        UserAdmin.message_12 = message.nextLine();
+
+        startOpt();
+
     }
 
 }
