@@ -59,10 +59,14 @@ public class UserMySQL {
 
             if(rs.next()){
                 do{
+                    Integer idUser = rs.getInt("id_finbox");
                     String nameUser = rs.getString("name_user");
                     String passwordUser = rs.getString("password_user");
                     if(nameUser.equals(user.getName()) && passwordUser.equals(user.getPassword())){
                         System.out.println("Session start");
+                        user.id = idUser;
+                        UserAdmin.userAdmin = user;
+                        UserMethods.startOptions();
                     }else{
                         //return si no es correcto el password
                         System.out.println("User or password incorrect");
@@ -99,6 +103,24 @@ public class UserMySQL {
             }catch(SQLException e) {
                 System.out.println(e);
             }
+    }
+    public static void  userDeleted(User user){
+
+        Connecxion coneccionn = Connecxion.get_instancia();
+
+        try(Connection cnc = coneccionn.get_connection()){
+            PreparedStatement psi;
+
+            String query="DELETE FROM users WHERE users.id_finbox = ?";
+            psi=cnc.prepareStatement(query);
+            psi.setInt(1, user.getId());
+            psi.executeUpdate();
+            System.out.println("Delete user");
+        }catch(SQLException e) {
+            System.out.println(e);
+            System.out.println("cannot delete user");
+        }
+
     }
 
 

@@ -39,5 +39,57 @@ public class UserMethods {
         UserMySQL.userMySQLStart(user_start);
     }
 
+    public static void exit(User user){
+        user.password = null;
+        user.name = null;
+        System.out.println("user Exit, success");
+    }
+
+
+    public  static void group(){
+
+    }
+
+    protected static void startOptions(){
+
+        System.out.println("1.Account\n2.Group");
+
+        Scanner startOpt = new Scanner(System.in);
+
+        String optStart = startOpt.nextLine();
+
+        switch (optStart){
+            case "1":
+                account();
+                break;
+            case "2":
+                GroupsMethods.optGroups();
+                break;
+            default:
+                System.out.println("Chose una option");
+        }
+
+    }
+
+    protected static void account(){
+
+        System.out.println("1.Exit\n2.Eliminated");
+        Scanner accountOpt = new Scanner(System.in);
+
+        String optAcc = accountOpt.nextLine();
+        switch (optAcc){
+            case "1":
+                UserMethods.exit(UserAdmin.userAdmin);
+                break;
+            case "2":
+                UserMySQL.userDeleted(UserAdmin.userAdmin);
+                break;
+            default:
+
+        }
+
+
+
+    }
 
 }
