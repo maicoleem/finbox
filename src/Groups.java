@@ -7,6 +7,16 @@ public class Groups {
     String passwordN;
     String passwordA;
 
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    String password;
+
 
     public int getId() {
         return id;
