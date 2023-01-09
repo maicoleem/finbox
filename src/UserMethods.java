@@ -4,6 +4,26 @@ public class UserMethods {
  *In this class be all methods that may be used for the users.
  * These methods are such as: created user, eliminated user and mdification password.
  * */
+
+    public static void init(){
+        //opciones al iniciar
+        System.out.println("Usuario \n1.Crear\n2.Iniciar");
+
+        Scanner optionUser = new Scanner(System.in);
+        String userOpt = optionUser.nextLine();
+        switch (userOpt){
+            case "1":
+                createUser();
+                break;
+            case "2":
+                startUser();
+                break;
+            default:
+                System.out.println("Choose an option");
+                init();
+                break;
+        }
+    }
     public static void createUser(){
         /**CrateUSer
          * this method is used for created user
@@ -67,8 +87,9 @@ public class UserMethods {
                 break;
             default:
                 System.out.println("Chose una option");
+                startOptions();
+                break;
         }
-
     }
 
     protected static void account(){
@@ -85,7 +106,9 @@ public class UserMethods {
                 UserMySQL.userDeleted(UserAdmin.userAdmin);
                 break;
             default:
-
+                System.out.println("Choose an option");
+                account();
+                break;
         }
 
 

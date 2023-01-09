@@ -70,12 +70,14 @@ public class UserMySQL {
                     }else{
                         //return si no es correcto el password
                         System.out.println("User or password incorrect");
+                        UserMethods.init();
                     }
                 }while(rs.next());
 
             }else{
                 //return si no hay coincidencias con el nombre del usuario
                 System.out.println("User or password incorrect");
+                UserMethods.init();
             }
 
 
@@ -100,6 +102,7 @@ public class UserMySQL {
                 psi.setString(2, user.getPassword());
                 psi.executeUpdate();
                 System.out.println("User created");
+                UserMethods.init();
             }catch(SQLException e) {
                 System.out.println(e);
             }

@@ -19,23 +19,30 @@ public class GroupsMethods {
                 break;
             default:
                 System.out.println("escoger una opción");
+                optGroups();
+                break;
         }
     }
 
     public static void startOpt(){
-        System.out.println("Options \n1.message \n2.upload\n3.download\n4.Eliminar \n5.Salir");
+        System.out.println("Options \n1.message \n2.Upload\n3.download\n4.Deleted Group \n5.Exit Group\n6.Deleted Messages");
         Scanner optGroup = new Scanner(System.in);
         String opt = optGroup.nextLine();
 
         switch (opt){
-            case "1":
+            case "1" :
                 //crear mensajes
                 createMessage();
                 break;
-            case "2":
-                //cargar mensaje
+            case "2" :
+                //cargar mensajes
+                UserAdmin.upDown = "upload";
+                GroupsMySQL.messageMySQL();
                 break;
+
             case "3":
+                UserAdmin.upDown = "download";
+                GroupsMySQL.messageMySQL();
                 //descargar mensaje
                 break;
             case "4":
@@ -44,8 +51,13 @@ public class GroupsMethods {
             case "5":
                 groupExit();
                 break;
+            case "6":
+                GroupsMySQL.deletedMessages();
+                break;
             default:
                 System.out.println("escoger una opción");
+                startOpt();
+                break;
         }
     }
 
@@ -145,6 +157,7 @@ public class GroupsMethods {
         System.out.println("write twelfth message");
         UserAdmin.message_12 = message.nextLine();
 
+        GroupsMySQL.messageMySQL();
         startOpt();
 
     }

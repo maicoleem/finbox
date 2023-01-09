@@ -15,5 +15,6 @@ public class UserAdmin extends  User {
     public static String message_11 = "";
     public static String message_12 = "";
     public static Integer id_message = null;
+    public static String upDown = "";
 
 }

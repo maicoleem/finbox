@@ -1,3 +1,4 @@
+import javax.jws.soap.SOAPBinding;
 import java.security.acl.Group;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -57,6 +58,7 @@ public class GroupsMySQL {
             psi.setString(3, group.getPasswordA());
             psi.executeUpdate();
             System.out.println("Group created");
+            GroupsMethods.optGroups();
         }catch(SQLException e) {
             System.out.println(e);
         }
@@ -136,18 +138,23 @@ public class GroupsMySQL {
                     String nameGroup = rs.getString("group_message");
 
                     if(nameGroup.equals(UserAdmin.groupAdmin.getName())){
-                        System.out.println("Update messages");
                         UserAdmin.id_message = idMessage;
-                        //ejecuta el Update en la tabla Message
-                        uploadMessage();
+                        //diferenciar entre cargar y descargar
+                            if(UserAdmin.upDown == "upload"){
+                                System.out.println("Update messages");
+                                uploadMessage();
+                            }else{
+                                System.out.println("Download messages");
+                                downloadMessages();
+                            }
                     }else{
                         System.out.println("Crear mensajes en la tabla");
-                        //INSERT INTO `message` (`id_message`, `group_message`, `message_1`, `message_2`, `message_3`, `message_4`, `message_5`, `message_6`, `message_7`, `message_8`, `message_9`, `message_10`, `message_11`, `message_12`) VALUES ('1', 'mario', 'sadfsafwqf vfvfv', 'sadasfasfwqf54s65a4sa56', 'fasfasdf', '745645sa4f8aw4f', '', 'asdfasdfwqrwfg', 'asfsafas', '', 'wrgyjutj', '', 'tyjtrjrtj', 'fddfghdfdf');
+                        insertMessage();
                     }
                 }while(rs.next());
 
             }else{
-                System.out.println("Crear mensajes en la tabla");
+                insertMessage();
             }
 
 
@@ -156,7 +163,6 @@ public class GroupsMySQL {
         }
 
     }
-    //UPDATE `message` SET `message_1` = 'sadfsafwqf vfvfv<ZCVAdfa', `message_2` = 'sadasfasfwqf54s65a4sa56sadfsadf', `message_3` = 'fasfasdfsadfasdfasda', `message_4` = '745645sa4f8aw4fasfasfsd', `message_6` = 'asdfasdfwqrwfgasdfasd', `message_7` = 'wqwewqefw', `message_8` = 'asdfasdf', `message_9` = 'afsadfsa', `message_10` = 'asdfasdfssa', `message_11` = 'tyjtrjrtjasdfasdf', `message_12` = 'fddfghdfdfadfasd' WHERE `message`.`id_message` = 1;
     public static void uploadMessage(){
         Connecxion coneccionn = Connecxion.get_instancia();
 
@@ -184,6 +190,125 @@ public class GroupsMySQL {
             System.out.println("Update Messages is unsuccessful");
         }
 
+    }
+
+    public static void insertMessage(){
+
+        Connecxion coneccionn = Connecxion.get_instancia();
+
+        try(Connection cnc = coneccionn.get_connection()){
+            PreparedStatement psi;
+
+            String query="INSERT INTO message (group_message" +
+                    ", message_1" +
+                    ", message_2" +
+                    ", message_3" +
+                    ", message_4" +
+                    ", message_5" +
+                    ", message_6" +
+                    ", message_7" +
+                    ", message_8" +
+                    ", message_9" +
+                    ", message_10" +
+                    ", message_11" +
+                    ", message_12) " +
+                    "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            psi=cnc.prepareStatement(query);
+            psi.setString(1, UserAdmin.groupAdmin.getName());
+            psi.setString(2, UserAdmin.message_1);
+            psi.setString(3, UserAdmin.message_2);
+            psi.setString(4, UserAdmin.message_3);
+            psi.setString(5, UserAdmin.message_4);
+            psi.setString(6, UserAdmin.message_5);
+            psi.setString(7, UserAdmin.message_6);
+            psi.setString(8, UserAdmin.message_7);
+            psi.setString(9, UserAdmin.message_8);
+            psi.setString(10, UserAdmin.message_9);
+            psi.setString(11, UserAdmin.message_10);
+            psi.setString(12, UserAdmin.message_11);
+            psi.setString(13, UserAdmin.message_12);
+            psi.executeUpdate();
+            System.out.println("Messages created");
+        }catch(SQLException e) {
+            System.out.println("Error, messages were not created");
+            System.out.println(e);
+        }
+
+    }
+    private static void downloadMessages(){
+        //SELECT * FROM `message` WHERE `id_message` = 1
+
+        //Obtiene instancia de la conección
+        Connecxion conectionStart = Connecxion.get_instancia();
+        //try cacth para evitar errores de coneccion
+        try(Connection cns = conectionStart.get_connection()){
+            PreparedStatement ps;
+            ResultSet rs;
+            //query de busquedad
+            String querySearch="SELECT * FROM message WHERE id_message LIKE ?";
+            ps= cns.prepareStatement(querySearch);
+            ps.setInt(1, UserAdmin.id_message);
+            rs=ps.executeQuery();
+
+            while(rs.next()){
+                UserAdmin.message_1 =rs.getString("message_1");
+                System.out.println("message 1: " + UserAdmin.message_1);
+
+                UserAdmin.message_2 =rs.getString("message_2");
+                System.out.println("message 2: " + UserAdmin.message_2);
+
+                UserAdmin.message_3 =rs.getString("message_3");
+                System.out.println("message 3: " + UserAdmin.message_3);
+
+                UserAdmin.message_4 =rs.getString("message_4");
+                System.out.println("message 4: " + UserAdmin.message_4);
+
+                UserAdmin.message_5 =rs.getString("message_5");
+                System.out.println("message 5: " + UserAdmin.message_5);
+
+                UserAdmin.message_6 =rs.getString("message_6");
+                System.out.println("message 6: " + UserAdmin.message_6);
+
+                UserAdmin.message_7 =rs.getString("message_7");
+                System.out.println("message 7: " + UserAdmin.message_7);
+
+                UserAdmin.message_8 =rs.getString("message_8");
+                System.out.println("message 8: " + UserAdmin.message_8);
+
+                UserAdmin.message_9 =rs.getString("message_9");
+                System.out.println("message 9: " + UserAdmin.message_9);
+
+                UserAdmin.message_10 =rs.getString("message_10");
+                System.out.println("message 10: " + UserAdmin.message_10);
+
+                UserAdmin.message_11 =rs.getString("message_11");
+                System.out.println("message 11: " + UserAdmin.message_11);
+
+                UserAdmin.message_12 =rs.getString("message_12");
+                System.out.println("message 12: " + UserAdmin.message_12);
+            }
+
+        }catch(SQLException s){
+            System.out.println(s);
+        }
+    }
+
+    public static void deletedMessages(){
+
+        Connecxion coneccionn = Connecxion.get_instancia();
+
+        try(Connection cnc = coneccionn.get_connection()){
+            PreparedStatement psi;
+
+            String query="DELETE FROM message WHERE id_message = ?";
+            psi=cnc.prepareStatement(query);
+            psi.setInt(1, UserAdmin.id_message);
+            psi.executeUpdate();
+            System.out.println("Delete Messages");
+        }catch(SQLException e) {
+            System.out.println(e);
+            System.out.println("cannot delete messages");
+        }
     }
 
 
