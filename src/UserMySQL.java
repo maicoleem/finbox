@@ -1,3 +1,4 @@
+import javax.jws.soap.SOAPBinding;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -66,18 +67,19 @@ public class UserMySQL {
                         System.out.println("Session start");
                         user.id = idUser;
                         UserAdmin.userAdmin = user;
-                        UserMethods.startOptions();
+                        UserAdmin.boo = true;
+                        //UserMethods.startOptions();
                     }else{
                         //return si no es correcto el password
                         System.out.println("User or password incorrect");
-                        UserMethods.init();
+                        //UserMethods.init();
                     }
                 }while(rs.next());
 
             }else{
                 //return si no hay coincidencias con el nombre del usuario
                 System.out.println("User or password incorrect");
-                UserMethods.init();
+                //UserMethods.init();
             }
 
 
@@ -102,7 +104,7 @@ public class UserMySQL {
                 psi.setString(2, user.getPassword());
                 psi.executeUpdate();
                 System.out.println("User created");
-                UserMethods.init();
+                //UserMethods.init();
             }catch(SQLException e) {
                 System.out.println(e);
             }
@@ -122,10 +124,9 @@ public class UserMySQL {
         }catch(SQLException e) {
             System.out.println(e);
             System.out.println("cannot delete user");
+            UserAdmin.boo = true;
         }
 
     }
-
-
 
 }

@@ -5,7 +5,7 @@ public class UserMethods {
  * These methods are such as: created user, eliminated user and mdification password.
  * */
 
-    public static void init(){
+   /* public static void init(){
         //opciones al iniciar
         System.out.println("Usuario \n1.Crear\n2.Iniciar");
 
@@ -23,8 +23,8 @@ public class UserMethods {
                 init();
                 break;
         }
-    }
-    public static void createUser(){
+    }*/
+    public static void createUser(String userName, String userPassword){
         /**CrateUSer
          * this method is used for created user
          * first aks for name and password
@@ -32,11 +32,11 @@ public class UserMethods {
          * third: send user to method of class that input in database MySQL
          * */
 
-        Scanner userCreate = new Scanner(System.in);
+        /*Scanner userCreate = new Scanner(System.in);
         System.out.println("input name of user: ");
         String userName = userCreate.nextLine();
         System.out.println("input password user: ");
-        String userPassword = userCreate.nextLine();
+        String userPassword = userCreate.nextLine();*/
 
         User userNew = new User();
         userNew.name = userName;
@@ -44,13 +44,13 @@ public class UserMethods {
         UserMySQL.userMySQLInsert(userNew);
     }
 
-    public static void startUser(){
+    public static void startUser(String userName, String userPassword){
 
-        Scanner userStart = new Scanner(System.in);
+        /*Scanner userStart = new Scanner(System.in);
         System.out.println("input User Name");
         String userName = userStart.nextLine();
         System.out.println("input password");
-        String userPassword = userStart.nextLine();
+        String userPassword = userStart.nextLine();*/
 
         User user_start = new User();
         user_start.name = userName;
@@ -60,9 +60,13 @@ public class UserMethods {
     }
 
     public static void exit(User user){
-        user.password = null;
-        user.name = null;
-        System.out.println("user Exit, success");
+        if(user == null){
+            System.out.println("user Exit, success");
+        }else{
+            user.password = null;
+            user.name = null;
+            System.out.println("user Exit, success");
+        }
     }
 
 
@@ -70,7 +74,7 @@ public class UserMethods {
 
     }
 
-    protected static void startOptions(){
+    /*protected static void startOptions(){
 
         System.out.println("1.Account\n2.Group");
 
@@ -90,7 +94,7 @@ public class UserMethods {
                 startOptions();
                 break;
         }
-    }
+    }*/
 
     protected static void account(){
 

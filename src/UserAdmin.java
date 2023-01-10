@@ -17,4 +17,6 @@ public class UserAdmin extends  User {
     public static Integer id_message = null;
     public static String upDown = "";
 
+    public static Boolean boo = false;
+
 }
