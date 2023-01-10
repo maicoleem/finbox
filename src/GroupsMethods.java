@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 public class GroupsMethods {
 
-    public static void optGroups(){
+    /*public static void optGroups(){
         System.out.println("Options Groups\n1.Crear grupo\n2.Unirse");
         Scanner optGroup = new Scanner(System.in);
         String opt = optGroup.nextLine();
@@ -22,7 +22,7 @@ public class GroupsMethods {
                 optGroups();
                 break;
         }
-    }
+    }*/
 
     public static void startOpt(){
         System.out.println("Options \n1.message \n2.Upload\n3.download\n4.Deleted Group \n5.Exit Group\n6.Deleted Messages");
@@ -61,32 +61,32 @@ public class GroupsMethods {
         }
     }
 
-    public static void groupCreated(){
-        System.out.println("input Name Of Group");
+    public static void groupCreated(String nameGroup, String passwordAdmin, String passwordOther){
+        /*System.out.println("input Name Of Group");
         Scanner creGroup = new Scanner(System.in);
         String nameGroup = creGroup.nextLine();
         System.out.println("input password user Admin");
         String passwordGroup = creGroup.nextLine();
         System.out.println("input password other user");
-        String passwordOther = creGroup.nextLine();
+        String passwordOther = creGroup.nextLine();*/
 
         Groups group;
         group = new Groups();
         group.name = nameGroup;
-        group.passwordA = passwordGroup;
+        group.passwordA = passwordAdmin;
         group.passwordN = passwordOther;
 
         GroupsMySQL.groupMySQLInsert(group);
 
     }
 
-    public static void groupLogin(){
+    public static void groupLogin(String nameGroup, String passwordGroup){
 
-        System.out.println("input Name Of Group");
+        /*System.out.println("input Name Of Group");
         Scanner creGroup = new Scanner(System.in);
         String nameGroup = creGroup.nextLine();
         System.out.println("input password");
-        String passwordGroup = creGroup.nextLine();
+        String passwordGroup = creGroup.nextLine();*/
 
         Groups group;
         group = new Groups();
@@ -106,6 +106,8 @@ public class GroupsMethods {
                 psi=cnc.prepareStatement(query);
                 psi.setInt(1, group.getId());
                 psi.executeUpdate();
+                UserAdmin.booAdmin = false;
+                UserAdmin.booOther = false;
                 System.out.println("Delete Group");
             }catch(SQLException e) {
                 System.out.println(e);
@@ -117,6 +119,8 @@ public class GroupsMethods {
     }
     public static void groupExit(){
         UserAdmin.groupAdmin = null;
+        UserAdmin.booAdmin = false;
+        UserAdmin.booOther = false;
         System.out.println("Group exit,Success");
     }
     public static void createMessage(){

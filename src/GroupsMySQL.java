@@ -58,7 +58,7 @@ public class GroupsMySQL {
             psi.setString(3, group.getPasswordA());
             psi.executeUpdate();
             System.out.println("Group created");
-            GroupsMethods.optGroups();
+            //GroupsMethods.optGroups();
         }catch(SQLException e) {
             System.out.println(e);
         }
@@ -86,6 +86,8 @@ public class GroupsMySQL {
 
                     if(nameGroup.equals(group.getName()) && passwordA.equals(group.getPassword())){
                         System.out.println("Session start");
+                        UserAdmin.booAdmin = true;
+                        UserAdmin.booOther = true;
                         group.id = idGroup;
                         group.passwordA = group.password;
                         //guarda el grupo en una variable
@@ -95,6 +97,8 @@ public class GroupsMySQL {
                     }else if (nameGroup.equals(group.getName()) && passwordN.equals(group.getPassword())){
                         //return si no es correcto el password
                         System.out.println("Session start");
+                        UserAdmin.booAdmin = false;
+                        UserAdmin.booOther = true;
                         group.id = idGroup;
                         group.passwordN = group.password;
                         //guarda el grupo en una variable

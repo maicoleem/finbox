@@ -16,7 +16,8 @@ public class UserAdmin extends  User {
     public static String message_12 = "";
     public static Integer id_message = null;
     public static String upDown = "";
-
     public static Boolean boo = false;
+    public static Boolean booAdmin = false;
+    public static Boolean booOther = false;
 
 }
