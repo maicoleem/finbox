@@ -93,7 +93,7 @@ public class GroupsMySQL {
                         //guarda el grupo en una variable
                         UserAdmin.groupAdmin = group;
                         //menu para cuando haya iniciado sesion
-                        GroupsMethods.startOpt();
+                        //GroupsMethods.startOpt();
                     }else if (nameGroup.equals(group.getName()) && passwordN.equals(group.getPassword())){
                         //return si no es correcto el password
                         System.out.println("Session start");
@@ -104,7 +104,7 @@ public class GroupsMySQL {
                         //guarda el grupo en una variable
                         UserAdmin.groupAdmin = group;
                         //menu para cuando haya iniciado sesion
-                        GroupsMethods.startOpt();
+                        //GroupsMethods.startOpt();
                     }else{
                         System.out.println("Group or password incorrect");
                     }
@@ -173,22 +173,37 @@ public class GroupsMySQL {
         try(Connection cnc = coneccionn.get_connection()){
             PreparedStatement psi;
 
-            String query="UPDATE message SET message_1 = "+UserAdmin.message_1
-                    +", message_2 = "+UserAdmin.message_2
-                    +", message_3 = "+UserAdmin.message_3
-                    +", message_4 = "+UserAdmin.message_4
-                    +", message_5 = "+UserAdmin.message_5
-                    +", message_6 = "+UserAdmin.message_6
-                    +", message_7 = "+UserAdmin.message_7
-                    +", message_8 = "+UserAdmin.message_8
-                    +", message_9 = "+UserAdmin.message_9
-                    +", message_10 = "+UserAdmin.message_10
-                    +", message_11 = "+UserAdmin.message_11
-                    +", message_12 = "+UserAdmin.message_12
+            String query="UPDATE message SET message_1 = ?"
+                    +", message_2 = ?"
+                    +", message_3 = ?"
+                    +", message_4 = ?"
+                    +", message_5 = ?"
+                    +", message_6 = ?"
+                    +", message_7 = ?"
+                    +", message_8 = ?"
+                    +", message_9 = ?"
+                    +", message_10 = ?"
+                    +", message_11 = ?"
+                    +", message_12 = ?"
                     +" WHERE message.id_message = "+ UserAdmin.id_message;
+            System.out.println(query);
             psi=cnc.prepareStatement(query);
+            psi.setString(1, UserAdmin.message_1);
+            psi.setString(2, UserAdmin.message_2);
+            psi.setString(3, UserAdmin.message_3);
+            psi.setString(4, UserAdmin.message_4);
+            psi.setString(5, UserAdmin.message_5);
+            psi.setString(6, UserAdmin.message_6);
+            psi.setString(7, UserAdmin.message_7);
+            psi.setString(8, UserAdmin.message_8);
+            psi.setString(9, UserAdmin.message_9);
+            psi.setString(10, UserAdmin.message_10);
+            psi.setString(11, UserAdmin.message_11);
+            psi.setString(12, UserAdmin.message_12);
+
             psi.executeUpdate();
             System.out.println("Update Messages is successful");
+
         }catch(SQLException e) {
             System.out.println(e);
             System.out.println("Update Messages is unsuccessful");
@@ -255,7 +270,7 @@ public class GroupsMySQL {
             rs=ps.executeQuery();
 
             while(rs.next()){
-                UserAdmin.message_1 =rs.getString("message_1");
+                UserAdmin.message_1 = rs.getString("message_1");
                 System.out.println("message 1: " + UserAdmin.message_1);
 
                 UserAdmin.message_2 =rs.getString("message_2");

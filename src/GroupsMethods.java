@@ -24,7 +24,7 @@ public class GroupsMethods {
         }
     }*/
 
-    public static void startOpt(){
+    /*public static void startOpt(){
         System.out.println("Options \n1.message \n2.Upload\n3.download\n4.Deleted Group \n5.Exit Group\n6.Deleted Messages");
         Scanner optGroup = new Scanner(System.in);
         String opt = optGroup.nextLine();
@@ -59,7 +59,7 @@ public class GroupsMethods {
                 startOpt();
                 break;
         }
-    }
+    }*/
 
     public static void groupCreated(String nameGroup, String passwordAdmin, String passwordOther){
         /*System.out.println("input Name Of Group");
@@ -123,7 +123,7 @@ public class GroupsMethods {
         UserAdmin.booOther = false;
         System.out.println("Group exit,Success");
     }
-    public static void createMessage(){
+    /*public static void createMessage(){
         System.out.println("write first message");
         Scanner message = new Scanner(System.in);
         UserAdmin.message_1 = message.nextLine();
@@ -162,8 +162,8 @@ public class GroupsMethods {
         UserAdmin.message_12 = message.nextLine();
 
         GroupsMySQL.messageMySQL();
-        startOpt();
+        //startOpt();
 
-    }
+    }*/
 
 }

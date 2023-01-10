@@ -36,8 +36,8 @@
         </constraints>
         <properties>
           <enabled value="false"/>
-          <label value="Message  3"/>
-          <text value="Message  3"/>
+          <label value="Message 3"/>
+          <text value="Message 3"/>
         </properties>
       </component>
       <hspacer id="730c6">
@@ -144,7 +144,7 @@
           <text value="Next"/>
         </properties>
       </component>
-      <component id="69a55" class="javax.swing.JTextArea" binding="textArea">
+      <component id="69a55" class="javax.swing.JTextArea" binding="taMessages">
         <constraints>
           <grid row="1" column="1" row-span="1" col-span="3" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
             <preferred-size width="400" height="700"/>
@@ -153,12 +153,13 @@
         <properties>
           <background color="-1184257"/>
           <disabledTextColor color="-16773109"/>
+          <enabled value="false"/>
           <font name="Consolas" size="20" style="0"/>
           <lineWrap value="true"/>
           <margin top="2" left="2" bottom="2" right="2"/>
-          <selectionEnd value="0"/>
+          <selectionEnd value="1"/>
           <tabSize value="14"/>
-          <text value=""/>
+          <text value=" "/>
           <wrapStyleWord value="true"/>
         </properties>
       </component>
