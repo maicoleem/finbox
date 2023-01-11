@@ -25,7 +25,7 @@ public class GroupsMySQL {
                         do{
                             String nameUser = rs.getString("name");
                             if(nameUser.equals(group.getName())){
-                                System.out.println("Group already exists");
+                                UserAdmin.groupsEstado = "Group already exists";
                             }else {
                                 GroupsMySQL.groupInsert(group);
                             }
@@ -57,7 +57,7 @@ public class GroupsMySQL {
             psi.setString(2, group.getPasswordN());
             psi.setString(3, group.getPasswordA());
             psi.executeUpdate();
-            System.out.println("Group created");
+            UserAdmin.groupsEstado = "Group Created";
             //GroupsMethods.optGroups();
         }catch(SQLException e) {
             System.out.println(e);
@@ -85,7 +85,7 @@ public class GroupsMySQL {
                     String passwordA = rs.getString("passwordA");
 
                     if(nameGroup.equals(group.getName()) && passwordA.equals(group.getPassword())){
-                        System.out.println("Session start");
+                        UserAdmin.groupsEstado = "Session Start";
                         UserAdmin.booAdmin = true;
                         UserAdmin.booOther = true;
                         group.id = idGroup;
@@ -96,7 +96,7 @@ public class GroupsMySQL {
                         //GroupsMethods.startOpt();
                     }else if (nameGroup.equals(group.getName()) && passwordN.equals(group.getPassword())){
                         //return si no es correcto el password
-                        System.out.println("Session start");
+                        UserAdmin.groupsEstado = "Session Start";
                         UserAdmin.booAdmin = false;
                         UserAdmin.booOther = true;
                         group.id = idGroup;
@@ -106,13 +106,13 @@ public class GroupsMySQL {
                         //menu para cuando haya iniciado sesion
                         //GroupsMethods.startOpt();
                     }else{
-                        System.out.println("Group or password incorrect");
+                        UserAdmin.groupsEstado = "Group or password incorrect";
                     }
                 }while(rs.next());
 
             }else{
                 //return si no hay coincidencias con el nombre del usuario
-                System.out.println("User or password incorrect");
+                UserAdmin.groupsEstado = "Group or password incorrect";
             }
 
 

@@ -19,6 +19,7 @@ public class Inicio {
     private JButton bNotifications;
     private JButton bNext;
     private JTextArea taMessages;
+    private JLabel lblStart;
 
     private String message = "Message 1";
     public Inicio() {
@@ -26,6 +27,7 @@ public class Inicio {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Main.jpSettings();
+                UserAdmin.startEstado = "Settings";
             }
         });
 
@@ -33,6 +35,7 @@ public class Inicio {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Main.jpGroups();
+                UserAdmin.startEstado = "Group";
             }
         });
         bNext.addActionListener(new ActionListener() {
@@ -62,6 +65,8 @@ public class Inicio {
             @Override
             public void actionPerformed(ActionEvent e) {
                 taMessages.setEnabled(!taMessages.isEnabled());
+                String tf = Boolean.valueOf(taMessages.isEnabled()).toString();
+                UserAdmin.startEstado = "Editable "+tf ;
                 messagesUA();
             }
         });
@@ -71,6 +76,7 @@ public class Inicio {
                 bDownload.setEnabled(UserAdmin.booOther);
                 bUpload.setEnabled(UserAdmin.booAdmin);
                 bNotifications.setEnabled(UserAdmin.booAdmin);
+                bGroup.setEnabled(UserAdmin.userAdmin != null);
 
                 message_1.setEnabled(UserAdmin.booOther);
                 message_2.setEnabled(UserAdmin.booOther);
@@ -78,6 +84,7 @@ public class Inicio {
                 message_4.setEnabled(UserAdmin.booOther);
                 message_5.setEnabled(UserAdmin.booOther);
                 Message_6.setEnabled(UserAdmin.booOther);
+                lblStart.setText(UserAdmin.startEstado);
                 super.mouseMoved(e);
             }
         });
@@ -152,6 +159,7 @@ public class Inicio {
             @Override
             public void actionPerformed(ActionEvent e) {
                 UserAdmin.upDown = "download";
+                UserAdmin.startEstado = "Download";
                 GroupsMySQL.messageMySQL();
             }
         });
@@ -159,13 +167,32 @@ public class Inicio {
             @Override
             public void actionPerformed(ActionEvent e) {
                 UserAdmin.upDown = "upload";
+                UserAdmin.startEstado = "Upload";
                 messagesUA();
                 GroupsMySQL.messageMySQL();
+            }
+        });
+        taMessages.addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                int Max_Len = 500;
+                char c = e.getKeyChar();
+                int len = taMessages.getText().length();
+                if (len < Max_Len){
+                    return;
+                }else{
+                    UserAdmin.groupsEstado = "Too Long";
+                    String user = new String(taMessages.getText());
+                    user = user.substring(0, Max_Len-1);
+                    taMessages.setText(user);
+                }
+                super.keyPressed(e);
             }
         });
     }
 
     private void showMessages(){
+        lblStart.setText(message);
         switch (message) {
             case "Message 1":
                 taMessages.setText(UserAdmin.message_1);

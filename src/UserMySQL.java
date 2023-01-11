@@ -25,7 +25,7 @@ public class UserMySQL {
                    do{
                        String nameUser = rs.getString("name_user");
                        if(nameUser.equals(user.getName())){
-                           System.out.println("User already exists");
+                           UserAdmin.userEstado = "User already exists";
                        }else {
                            UserMySQL.userInsert(user);
                        }
@@ -64,21 +64,21 @@ public class UserMySQL {
                     String nameUser = rs.getString("name_user");
                     String passwordUser = rs.getString("password_user");
                     if(nameUser.equals(user.getName()) && passwordUser.equals(user.getPassword())){
-                        System.out.println("Session start");
+                        UserAdmin.userEstado = "Session Start";
                         user.id = idUser;
                         UserAdmin.userAdmin = user;
                         UserAdmin.boo = true;
                         //UserMethods.startOptions();
                     }else{
                         //return si no es correcto el password
-                        System.out.println("User or password incorrect");
+                        UserAdmin.userEstado = "ser or password incorrect";
                         //UserMethods.init();
                     }
                 }while(rs.next());
 
             }else{
                 //return si no hay coincidencias con el nombre del usuario
-                System.out.println("User or password incorrect");
+                UserAdmin.userEstado = "ser or password incorrect";
                 //UserMethods.init();
             }
 
@@ -103,7 +103,7 @@ public class UserMySQL {
                 psi.setString(1, user.getName());
                 psi.setString(2, user.getPassword());
                 psi.executeUpdate();
-                System.out.println("User created");
+                UserAdmin.userEstado = "USer Created";
                 //UserMethods.init();
             }catch(SQLException e) {
                 System.out.println(e);
@@ -120,10 +120,10 @@ public class UserMySQL {
             psi=cnc.prepareStatement(query);
             psi.setInt(1, user.getId());
             psi.executeUpdate();
-            System.out.println("Delete user");
+            UserAdmin.userEstado = "Deleted User";
         }catch(SQLException e) {
             System.out.println(e);
-            System.out.println("cannot delete user");
+            UserAdmin.userEstado = "Cannot Deleted User";
             UserAdmin.boo = true;
         }
 

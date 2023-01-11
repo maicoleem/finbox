@@ -33,7 +33,7 @@ public class Connecxion {
             JOptionPane.showMessageDialog(null, "DESCONEXIÓN");
 
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "Erro: " + e);
+            JOptionPane.showMessageDialog(null, "Error: " + e);
             connecxion.close();
         } finally {
             connecxion.close();

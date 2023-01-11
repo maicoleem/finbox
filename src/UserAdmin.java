@@ -19,5 +19,8 @@ public class UserAdmin extends  User {
     public static Boolean boo = false;
     public static Boolean booAdmin = false;
     public static Boolean booOther = false;
+    public static String userEstado = "Sing up";
+    public static String groupsEstado = "Sing up";
+    public static String startEstado = "Start";
 
 }

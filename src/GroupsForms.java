@@ -15,6 +15,7 @@ public class GroupsForms {
     private JLabel lbPA;
     private JLabel lbPN;
     private JButton bExitG;
+    private JLabel lblGroups;
 
     public GroupsForms() {
         bCreateG.addActionListener(new ActionListener() {
@@ -58,6 +59,7 @@ public class GroupsForms {
             public void mouseMoved(MouseEvent e) {
                 bDeletedG.setEnabled(UserAdmin.booAdmin);
                 bExitG.setEnabled(UserAdmin.booOther);
+                lblGroups.setText(UserAdmin.groupsEstado);
                 super.mouseMoved(e);
             }
         });
@@ -70,7 +72,7 @@ public class GroupsForms {
                 if (len < Max_Len){
                     return;
                 }else{
-                    System.out.println("Too Long");
+                    UserAdmin.groupsEstado = "Too Long";
                     String user = tfGroupName.getText();
                     user = user.substring(0, Max_Len-1);
                     tfGroupName.setText(user);
@@ -87,7 +89,7 @@ public class GroupsForms {
                 if (len < Max_Len){
                     return;
                 }else{
-                    System.out.println("Too Long");
+                    UserAdmin.groupsEstado = "Too Long";
                     String user = new String(pfPasswordAdmin.getPassword());
                     user = user.substring(0, Max_Len-1);
                     pfPasswordAdmin.setText(user);
@@ -104,7 +106,7 @@ public class GroupsForms {
                     if (len < Max_Len){
                         return;
                     }else{
-                        System.out.println("Too Long");
+                        UserAdmin.groupsEstado = "Too Long";
                         String user = new String(pfPasswordOther.getPassword());
                         user = user.substring(0, Max_Len-1);
                         pfPasswordOther.setText(user);

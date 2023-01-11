@@ -61,11 +61,12 @@ public class UserMethods {
 
     public static void exit(User user){
         if(user == null){
-            System.out.println("user Exit, success");
+            UserAdmin.userEstado = "User Exit, success";
         }else{
             user.password = null;
             user.name = null;
-            System.out.println("user Exit, success");
+            UserAdmin.userAdmin = null;
+            UserAdmin.userEstado = "User Exit, success";
         }
     }
 

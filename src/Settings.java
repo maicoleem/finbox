@@ -79,6 +79,7 @@ public class Settings {
             public void mouseMoved(MouseEvent e) {
                 bDeleted.setEnabled(UserAdmin.boo);
                 bExit.setEnabled(UserAdmin.boo);
+                lblUser.setText(UserAdmin.userEstado);
                 super.mouseMoved(e);
             }
         });
@@ -91,5 +92,6 @@ public class Settings {
     public JButton bDeleted;
     private JPasswordField pfPassword;
     public JPanel jpSettings;
+    private JLabel lblUser;
 
 }
